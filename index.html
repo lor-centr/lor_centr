@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Рекламный баннер | Многопрофильная клиника</title>
+    <!-- Google Fonts + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper для горизонтальной карусели -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #EFF3F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+        }
+
+        /* Баннер */
+        .banner {
+            max-width: 1100px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 36px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .banner-inner {
+            padding: 28px 28px 32px;
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Элементы с последовательной анимацией */
+        .top-row, .hero, .services-section, .benefits, .cta-wrapper, .footer-simple {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .top-row { animation-delay: 0.05s; }
+        .hero { animation-delay: 0.1s; }
+        .services-section { animation-delay: 0.2s; }
+        .benefits { animation-delay: 0.3s; }
+        .cta-wrapper { animation-delay: 0.4s; }
+        .footer-simple { animation-delay: 0.5s; }
+
+        /* Шапка: по умолчанию логотип слева, номера справа */
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+        }
+        .clinic-name {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #1A306F;
+            letter-spacing: -0.3px;
+        }
+        .phones-block {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            background: #F8FBFE;
+            padding: 6px 18px;
+            border-radius: 50px;
+        }
+        .phones-block a {
+            text-decoration: none;
+            font-weight: 700;
+            color: #1A306F;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .phones-block i {
+            color: #2BB6C5;
+        }
+
+        /* Герой */
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1A306F;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .hero .subhead {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #5F7A92;
+            display: inline-block;
+            border-left: 3px solid #2BB6C5;
+            padding-left: 14px;
+        }
+
+        /* Карусель услуг */
+        .services-section {
+            margin: 24px 0 20px;
+        }
+        .swiper {
+            overflow: visible;
+            padding: 6px 2px 20px 2px;
+        }
+        .service-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 20px 18px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #EAF0F5;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: #2BB6C5;
+            box-shadow: 0 20px 28px -12px rgba(43, 182, 197, 0.2);
+        }
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: #F0F8FC;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #2BB6C5;
+            margin-bottom: 16px;
+            transition: transform 0.2s;
+        }
+        .service-card:hover .card-icon {
+            transform: scale(1.03);
+        }
+        .service-card h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1A306F;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+        }
+        .service-desc {
+            font-size: 0.78rem;
+            color: #4A6F88;
+            line-height: 1.4;
+            margin-top: 4px;
+            list-style: none;
+        }
+        .service-desc li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .service-desc li i {
+            color: #2BB6C5;
+            font-size: 0.7rem;
+            width: 16px;
+            margin-top: 3px;
+        }
+
+        /* НОВЫЙ БЛОК ПРЕИМУЩЕСТВ — минималистичная «схема» с номерами, без фона и иконок */
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 28px 0 24px;
+            padding: 0 4px;
+        }
+        .benefit-card {
+            flex: 1;
+            min-width: 110px;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 24px;
+            transition: all 0.2s;
+            background: transparent;
+        }
+        .benefit-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2BB6C5;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+        .benefit-item {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1A306F;
+            line-height: 1.3;
+        }
+        /* легкий разделитель при наведении */
+        .benefit-card:hover {
+            transform: translateY(-2px);
+        }
+        .benefit-card:hover .benefit-number {
+            opacity: 1;
+            color: #1A306F;
+        }
+
+        /* Кнопка CTA */
+        .cta-wrapper {
+            text-align: center;
+            margin: 18px 0 24px;
+        }
+        .btn-cta {
+            background: #2BB6C5;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 18px -8px rgba(43, 182, 197, 0.4);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+        .btn-cta:hover {
+            background: #1e9eab;
+            transform: scale(1.02);
+            box-shadow: 0 16px 22px -10px rgba(43, 182, 197, 0.5);
+        }
+
+        /* Футер */
+        .footer-simple {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6C8BA0;
+            padding-top: 12px;
+            border-top: 1px solid #ECF3F8;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-simple span i {
+            color: #2BB6C5;
+            margin-right: 4px;
+        }
+
+        /* Стили Swiper */
+        .swiper-button-next, .swiper-button-prev {
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: #2BB6C5;
+            transition: 0.2s;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #2BB6C5;
+            color: white;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 16px;
+        }
+        .swiper-pagination-bullet-active {
+            background: #2BB6C5;
+        }
+
+        /* Адаптив: на мобилках шапку по центру, блок преимуществ в две строки */
+        @media (max-width: 760px) {
+            .banner-inner {
+                padding: 20px 18px 24px;
+            }
+            /* логотип и телефоны — по центру */
+            .top-row {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .logo-area {
+                justify-content: center;
+            }
+    .phones-block {
+        flex-direction: row;        /* телефоны в строку */
+        justify-content: center;    /* центрируем по горизонтали */
+        gap: 12px;                  /* уменьшаем расстояние между номерами */
+        padding: 6px 12px;          /* чуть уже отступы */
+        flex-wrap: wrap;            /* если совсем не влезут — перенос */
+    }
+    
+    .phones-block a {
+        font-size: 0.8rem;          /* размер шрифта при необходимости */
+        white-space: nowrap;        /* чтобы номер не переносился внутри */
+    }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .btn-cta {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+            .clinic-name {
+                font-size: 1rem;
+            }
+            .phones-block a {
+                font-size: 0.8rem;
+            }
+            .swiper-button-next, .swiper-button-prev {
+                display: none;
+            }
+            .service-card {
+                padding: 16px;
+            }
+            .card-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+            .service-card h3 {
+                font-size: 0.9rem;
+            }
+            /* преимущества: 2 колонки на маленьких экранах */
+            .benefits {
+                gap: 20px;
+                row-gap: 20px;
+            }
+            .benefit-card {
+                flex: 0 0 calc(50% - 10px);
+                min-width: auto;
+            }
+        }
+        @media (min-width: 761px) and (max-width: 899px) {
+            .benefit-card {
+                flex: 0 0 calc(20% - 12px);
+            }
+        }
+        /* фиксация одинаковой высоты карточек */
+        .swiper-slide {
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <div class="banner-inner">
+        <!-- ШАПКА: лого + телефоны (на мобилках центрируется) -->
+        <div class="top-row">
+            <div class="logo-area">
+                <img src="logo.png" alt="Логотип клиники" class="logo-img" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="clinic-name" style="display: inline-block;">ЛОР-центр Арзамас</span>
+                <span class="clinic-name" style="display: none;">ЛОР-центр Арзамас</span>
+            </div>
+            <div class="phones-block">
+                <a href="tel:+79202969011"><i class="fas fa-phone-alt"></i> +7 (920) 296-90-11</a>
+                <a href="tel:+78314775032"><i class="fas fa-phone-alt"></i> +7 (831) 477-50-32</a>
+            </div>
+        </div>
+
+        <!-- ЗАГОЛОВОК -->
+        <div class="hero">
+            <h1>Современная многопрофильная<br>клиника для всей семьи</h1>
+            <div class="subhead">Диагностика, лечение и хирургия в одном месте</div>
+        </div>
+
+        <!-- КАРУСЕЛЬ УСЛУГ (7 карточек) -->
+        <div class="services-section">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- 1. ПРИЕМ СПЕЦИАЛИСТОВ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-user-md"></i></div>
+                            <h3>ПРИЕМ СПЕЦИАЛИСТОВ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Терапевт, дерматолог, невролог</li>
+                                <li><i class="fas fa-check"></i> Эндокринолог, гинеколог, уролог</li>
+                                <li><i class="fas fa-check"></i> Педиатр и другие специалисты</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 2. УЗИ, МОНИТОРИНГ, ЭЭГ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>УЗИ, МОНИТОРИНГ, ЭЭГ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> УЗИ экспертного класса</li>
+                                <li><i class="fas fa-check"></i> Суточное мониторирование (ЭКГ, АД)</li>
+                                <li><i class="fas fa-check"></i> Электроэнцефалография (ЭЭГ)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 3. ЛАБОРАТОРНЫЕ АНАЛИЗЫ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-flask"></i></div>
+                            <h3>ЛАБОРАТОРНЫЕ АНАЛИЗЫ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Гормональные исследования</li>
+                                <li><i class="fas fa-check"></i> Аллергопрофили, ПЦР-диагностика</li>
+                                <li><i class="fas fa-check"></i> Клинические анализы — быстро</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 4. СТОМАТОЛОГИЯ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-tooth"></i></div>
+                            <h3>СТОМАТОЛОГИЯ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Лечение зубов, гигиена</li>
+                                <li><i class="fas fa-check"></i> Протезирование и имплантация</li>
+                                <li><i class="fas fa-check"></i> Детский прием</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 5. ЛАЗЕРНАЯ ЛОР-ХИРУРГИЯ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-ear-listen"></i></div>
+                            <h3>ЛАЗЕРНАЯ ЛОР-ХИРУРГИЯ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Лазерное лечение носа и горла</li>
+                                <li><i class="fas fa-check"></i> Малотравматичные операции</li>
+                                <li><i class="fas fa-check"></i> Быстрое восстановление</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 6. ЛАЗЕРНОЕ ЛЕЧЕНИЕ ВАРИКОЗА -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3>ЛАЗЕРНОЕ ЛЕЧЕНИЕ ВАРИКОЗА</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Современные методы лечения варикоза</li>
+                                <li><i class="fas fa-check"></i> Без госпитализации</li>
+                                <li><i class="fas fa-check"></i> Минимальный период реабилитации</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 7. ПОДБОР СЛУХОВЫХ АППАРАТОВ -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-icon"><i class="fas fa-assistive-listening-systems"></i></div>
+                            <h3>ПОДБОР СЛУХОВЫХ АППАРАТОВ</h3>
+                            <ul class="service-desc">
+                                <li><i class="fas fa-check"></i> Компьютерная диагностика слуха</li>
+                                <li><i class="fas fa-check"></i> Подбор и настройка аппаратов</li>
+                                <li><i class="fas fa-check"></i> Сервисное сопровождение</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Навигация и пагинация Swiper -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <!-- НОВЫЙ МИНИМАЛИСТИЧНЫЙ БЛОК ПРЕИМУЩЕСТВ (схема с номерами) -->
+        <div class="benefits">
+            <div class="benefit-card">
+                <div class="benefit-number">01</div>
+                <div class="benefit-item">Опытные специалисты</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">02</div>
+                <div class="benefit-item">Современное оборудование</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">03</div>
+                <div class="benefit-item">Лазерные технологии</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">04</div>
+                <div class="benefit-item">Индивидуальный подход</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">05</div>
+                <div class="benefit-item">Комфортный прием</div>
+            </div>
+        </div>
+
+        <!-- КНОПКА ЗАПИСАТЬСЯ НА ПРИЁМ (ведёт в VK) -->
+        <div class="cta-wrapper">
+            <a href="https://vk.com/lor_centr_arzamas" target="_blank" class="btn-cta">Записаться на приём</a>
+        </div>
+
+        <!-- ФУТЕР: адрес и режим работы -->
+        <div class="footer-simple">
+            <span><i class="fas fa-map-marker-alt"></i> г. Арзамас, ул. Калинина, 12</span>
+            <span><i class="fas fa-clock"></i> 08:00 – 20:00 ежедневно</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Инициализация горизонтальной карусели
+    const swiper = new Swiper('.mySwiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: false,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            900: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+            }
+        },
+        grabCursor: true,
+        speed: 450,
+    });
+
+    // fallback для логотипа
+    const logoImg = document.querySelector('.logo-img');
+    const clinicSpan = document.querySelector('.clinic-name');
+    if (logoImg) {
+        logoImg.onerror = function() {
+            logoImg.style.display = 'none';
+            if (clinicSpan) clinicSpan.style.display = 'inline-block';
+        };
+        logoImg.onload = function() {
+            if (clinicSpan) clinicSpan.style.display = 'none';
+        };
+    }
+</script>
+</body>
+</html>
